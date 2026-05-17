@@ -4,11 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { SiteNav } from "@/components/SiteNav";
 
 function NotFoundComponent() {
@@ -69,49 +66,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Portfolio - Nethra" },
-      { name: "description", content: "Personal portfolio" },
-      { name: "author", content: "Engineering Student" },
-      { property: "og:title", content: "Portfolio - Nethra" },
-      { property: "og:description", content: "Personal portfolio" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Portfolio - Nethra" },
-      { name: "twitter:description", content: "Personal portfolio" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/caa5fc52-17ba-4e25-8168-85a5722c14b8/id-preview-331ee905--bfcd258f-e335-420e-9d5a-d62a5bdc2a75.lovable.app-1779020431111.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/caa5fc52-17ba-4e25-8168-85a5722c14b8/id-preview-331ee905--bfcd258f-e335-420e-9d5a-d62a5bdc2a75.lovable.app-1779020431111.png" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
